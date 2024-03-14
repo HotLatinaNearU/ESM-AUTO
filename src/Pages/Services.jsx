@@ -1,11 +1,13 @@
 import { NavbarSignedIn } from '../Components/Top-Nav';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import FadeIn from "react-fade-in";
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-export default function ShowServices(){
+
+export default function ShowServices() {
     const [scrollY, setScrollY] = useState(0);
+    const [activeButton, setActiveButton] = useState(1); 
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,72 +19,92 @@ export default function ShowServices(){
 
     const opacity = 1 - scrollY / window.innerHeight;
 
+    const handleButtonClick = (buttonNumber) => {
+        setActiveButton(buttonNumber);
+    };
 
-
-
-    return(
+    return (
         <div>
-            <NavbarSignedIn/>
+            <NavbarSignedIn />
             <FadeIn delay={1000} transitionDuration={800} style={{ opacity }}>
+                <div style={{ backgroundColor: "white", width: "100%", borderRadius: "20px", maxWidth:"100%" }} id={"services" + activeButton}>
+                    
+                    <h1 style={{ marginTop: "20%", fontSize: "200%" }}>Services</h1>
+                    
+                    <div>
+                        <ButtonToolbar aria-label="Toolbar with button groups">
+                        <ButtonGroup className="me-2" aria-label="First group" style={{width:"100%", marginLeft:"2%" }}>
+                            <Button
+                                style={{ color: "black", backgroundColor: "white", borderColor: "white", zIndex:"0", borderColor:"black"}}
+                                onClick={() => handleButtonClick(1)}
+                                active={activeButton === 1}
+                            >
+                                1
+                            </Button>
+                            <Button
+                                style={{ color: "black", backgroundColor: "white", borderColor: "white", zIndex:"0", borderColor:"black" }}
+                                onClick={() => handleButtonClick(2)}
+                                active={activeButton === 2}
+                            >
+                                2
+                            </Button>
+                        </ButtonGroup>
+                    </ButtonToolbar>
+                        
+                        {activeButton === 1 && (
+                        <>
+                        <div >
+                            <h2 style={{fontSize:"120%"}}>Basic interior</h2>
+                            <p style={{color:"black"}}>Vacuum, entire interior scrub down, window clean, finished with a UV and dust protection coating for all surface </p>
+                            <p style={{color:"black"}}>1-2 hours</p>
 
-                <div style={{backgroundColor:"white", width:"100%", borderRadius:"20px"}} id={"services1"}>
-                        <h1 style={{marginTop:"20%", fontSize:"200%"}}>Services</h1>
+                            <h2 style={{fontSize:"120%"}}>Basic wash</h2>
+                            <p style={{color:"black"}}>Power washer rinse, snow foam, hand clean, wheel clean, dry, spray wax</p>
+                            <p style={{color:"black"}}>1+ hours</p>
 
-                    <div >
-                        <h2 style={{fontSize:"120%"}}>Basic interior</h2>
-                        <p style={{color:"black"}}>Vacuum, entire interior scrub down, window clean, finished with a UV and dust protection coating for all surface </p>
-                        <p style={{color:"black"}}>1-2 hours</p>
+                            <h2 style={{fontSize:"120%"}}>Basic package</h2>
+                            <p style={{color:"black"}}>Combines both basic washes</p>
+                            <p style={{color:"black"}}>2+ hours</p>
 
-                        <h2 style={{fontSize:"120%"}}>Basic wash</h2>
-                        <p style={{color:"black"}}>Power washer rinse, snow foam, hand clean, wheel clean, dry, spray wax</p>
-                        <p style={{color:"black"}}>1+ hours</p>
+                            <h2 style={{fontSize:"120%"}}>Deep interior clean</h2>
+                            <p style={{color:"black"}}>The basic interior package but with stain extraction and a deep scrub of plastic</p>
+                            <p style={{color:"black"}}>3-4 hours</p>
 
-                        <h2 style={{fontSize:"120%"}}>Basic package</h2>
-                        <p style={{color:"black"}}>Combines both basic washes</p>
-                        <p style={{color:"black"}}>2+ hours</p>
+                            <h2 style={{fontSize:"120%"}}>Wash, Decontamination, Clay and Seal</h2>
+                            <p style={{color:"black"}}>Our basic wash with a complete deconamination of the paint using a clay bar and iron remover finished with a paint sealeant too keep your car looking good</p>
+                            <p style={{color:"black"}}>3+ hours</p>
 
-                        <h2 style={{fontSize:"120%"}}>Deep interior clean</h2>
-                        <p style={{color:"black"}}>The basic interior package but with stain extraction and a deep scrub of plastic</p>
-                        <p style={{color:"black"}}>3-4 hour service</p>
+                           
+                        </div>
+
+
+
+
+                        </>
+                        )}
+                        {activeButton === 2 && (
+                            <>
+                            <h2 style={{fontSize:"120%"}}>One set polish</h2>
+                            <p style={{color:"black"}}>Includes a complete wash along with a complete clay bar and decontamination of the paint. Finished with one step polish</p>
+                            <p style={{color:"black"}}>3-4 hours</p>
+
+                            <h2 style={{fontSize:"120%"}}>2-step paint correction</h2>
+                            <p style={{color:"black"}}>An entire interior wash with an iron decontamination followed by an entire clay bar to remove any extra contamanation. after that we cut the paint with a cutting paste using a random orbital DA polisher finally we finish with polish</p>
+                            <p style={{color:"black"}}>5+ hours</p>
+
+                            <h2 style={{fontSize:"120%"}}>1 year ceramic coating</h2>
+                            <p style={{color:"black"}}>paint protection lasting 1 year this will include our entire two step paint correction followed by the ceramic coating application leaving your paint with 1 year of permanent protection</p>
+                            <p style={{color:"black"}}>6+ hours</p>
+
+                            <h2 style={{fontSize:"120%"}}>3-5 year ceramic coating</h2>
+                            <p style={{color:"black"}}>Our best paint protection lasting 5+ years this will include our entire two step paint correction followed by the ceramic coating application leaving your paint with 5+ years of permanent protection</p>
+                            <p style={{color:"black"}}>6+ hours</p>
+                            </>
+                        )}
                     </div>
-
-
                 </div>
-
-                <div style={{backgroundColor:"white", width:"100%", borderRadius:"20px"}} id={"services2"}>
-                    <h1 style={{marginTop:"10%", fontSize:"200%"}}>Services</h1>
-
-                    <div >
-                        <h2 style={{fontSize:"120%"}}>Basic interior</h2>
-                        <p style={{color:"black"}}>Vacuum, entire interior scrub down, window clean, finished with a UV and dust protection coating for all surface </p>
-                        <p style={{color:"black"}}>1-2 hours</p>
-
-                        <h2 style={{fontSize:"120%"}}>Basic wash</h2>
-                        <p style={{color:"black"}}>Power washer rinse, snow foam, hand clean, wheel clean, dry, spray wax</p>
-                        <p style={{color:"black"}}>1+ hours</p>
-
-                        <h2 style={{fontSize:"120%"}}>Basic package</h2>
-                        <p style={{color:"black"}}>Combines both basic washes</p>
-                        <p style={{color:"black"}}>2+ hours</p>
-
-                        <h2 style={{fontSize:"120%"}}>Deep interior clean</h2>
-                        <p style={{color:"black"}}>The basic interior package but with stain extraction and a deep scrub of plastic</p>
-                        <p style={{color:"black"}}>3-4 hour service</p>
-                    </div>
-
-
-                </div>
-
-                <ButtonToolbar aria-label="Toolbar with button groups">
-                    <ButtonGroup className="me-2" aria-label="First group">
-                        <Button style={{color:"black", backgroundColor:"white", borderColor:"white"}} /*onClick={() => }*/>1</Button>
-                        <Button style={{color:"black", backgroundColor:"white", borderColor:"white"}} /*onClick={() => }*/>2</Button>
-                    </ButtonGroup>
-                </ButtonToolbar>
 
             </FadeIn>
         </div>
-
-
     );
 }

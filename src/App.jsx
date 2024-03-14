@@ -4,6 +4,9 @@ import { WelcomeDesktop, WelcomeMobile } from './Pages/WelcomePage';
 import ContactEsm  from './Pages/ContactPage.jsx';
 import ShowServices from './Pages/Services.jsx';
 import CompletedWork from './Pages/Completed.jsx';
+
+//https://www.youtube.com/watch?v=XhoWXhyuW_I
+
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
