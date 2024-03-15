@@ -256,3 +256,9 @@ h2{
   color: white; 
 }
 
+
+
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("./assets/list.svg") !important;
+}

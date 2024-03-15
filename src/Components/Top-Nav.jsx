@@ -21,9 +21,9 @@ export function NavbarSignedIn() {
 
         />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ fill:"white", color:"white", marginRight:"5%"}} />
+      <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ fill:"white", color:"white", marginRight:"5%"}}  />
       <Navbar.Collapse id="basic-navbar-nav" >
-        <Nav className="ms-auto" >
+        <Nav className="ms-auto"  >
           <Nav.Link style={{ color: 'white', fontSize: "30px" }} onClick={() => navigateTo('/')}>Home</Nav.Link>
           <Nav.Link style={{ color: 'white', fontSize: "30px" }} onClick={() => navigateTo('/Contact')}>Contact</Nav.Link>
           <Nav.Link style={{ color: 'white', fontSize: "30px" }} onClick={() => navigateTo('/Completed')}>Completed</Nav.Link>
