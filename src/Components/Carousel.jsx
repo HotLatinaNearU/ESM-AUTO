@@ -1,12 +1,78 @@
-import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from "../assets/esm1.jpg";
-import img2 from "../assets/esm2.jpg";
-import img3 from "../assets/esm3.jpg";
-import img4 from "../assets/esm4.jpg";
+import React, { useState, useEffect } from 'react';
+import '../App.css';
+import {getStorage, getDownloadURL, ref as storageRef } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, get, set } from "firebase/database";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
 
 
 export function CarouselComponentMobile() {
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBgTlxGlidVt_EpjVfXcxsji1trkcMTtQ4",
+        authDomain: "esm-auto.firebaseapp.com",
+        databaseURL: "https://esm-auto-default-rtdb.firebaseio.com",
+        projectId: "esm-auto",
+        storageBucket: "esm-auto.appspot.com",
+        messagingSenderId: "646405515422",
+        appId: "1:646405515422:web:afc778cbecfc0008fc738f",
+        measurementId: "G-LS5H0N68BE"
+      };
+
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const auth = getAuth(app);
+    const dbref = ref(db);
+    const storage = getStorage(app); 
+    
+    
+    const [imageUrl1, setImageUrl1] = useState(null);
+    const [imageUrl2, setImageUrl2] = useState(null);
+    const [imageUrl3, setImageUrl3] = useState(null);
+    const [imageUrl4, setImageUrl4] = useState(null);
+    const [imageUrlSer1, setImageUrlSer1] = useState(null);
+    const [imageUrlSer2, setImageUrlSer2] = useState(null);
+    const [imageUrlSer3, setImageUrlSer3] = useState(null);
+
+
+    useEffect(() => {
+
+
+        const imgRefs = [
+            storageRef(storage, '/slide1/slide1'),
+            storageRef(storage, '/slide2/slide2'),
+            storageRef(storage, '/slide3/slide3'),
+            storageRef(storage, '/slide4/slide4'),
+            storageRef(storage, '/service1/service1'),
+            storageRef(storage, '/service2/service2'),
+            storageRef(storage, '/service3/service3'),
+
+        ];
+    
+        const imgSetters = [
+            setImageUrl1,
+            setImageUrl2,
+            setImageUrl3,
+            setImageUrl4,
+            setImageUrlSer1,
+            setImageUrlSer2,
+            setImageUrlSer3,
+        ];
+    
+        imgRefs.forEach((imageRef, index) => {
+            getDownloadURL(imageRef)
+                .then((url) => {
+                    imgSetters[index](url);
+                })
+                .catch((error) => {
+                    console.error('Error getting download URL:', error);
+                });
+        });
+    }, []);
+    
+
     return (
         <Carousel
             style={{ textAlign: 'center', zIndex:0}} 
@@ -17,7 +83,7 @@ export function CarouselComponentMobile() {
             <Carousel.Item interval={5000}> 
                 <img 
                     className="d-block mx-auto" 
-                    src={img1}
+                    src={imageUrl1}
                     alt="Image One"
                     style={{ maxWidth: "100%", height: "400px" }}
                 /> 
@@ -25,7 +91,7 @@ export function CarouselComponentMobile() {
             <Carousel.Item interval={5000}> 
                 <img 
                     className="d-block mx-auto" 
-                    src={img2}
+                    src={imageUrl2}
                     alt="Image Two"
                     style={{ maxWidth: "100%", height: "400px" }}
                 /> 
@@ -33,7 +99,7 @@ export function CarouselComponentMobile() {
             <Carousel.Item interval={5000}> 
                 <img 
                     className="d-block mx-auto" 
-                    src={img3}
+                    src={imageUrl3}
                     alt="Image Two"
                     style={{ maxWidth: "100%", height: "400px" }}
                 /> 
@@ -41,7 +107,7 @@ export function CarouselComponentMobile() {
             <Carousel.Item interval={5000}> 
                 <img 
                     className="d-block mx-auto" 
-                    src={img4}
+                    src={imageUrl4}
                     alt="Image Two"
                     style={{ maxWidth: "100%", height: "400px" }}
                 /> 
@@ -65,7 +131,7 @@ export function CarouselComponentDesktop() {
                 <Carousel.Item interval={5000}> 
                     <img 
                         className="d-block"
-                        src={img1}
+                        src={"test.png"}
                         alt="Image One"
                         style={{ width: "60%", height: "450px", margin: "auto" }}
                     /> 
@@ -73,7 +139,7 @@ export function CarouselComponentDesktop() {
                 <Carousel.Item interval={5000}> 
                     <img 
                         className="d-block"
-                        src={img2}
+                        src={"test.png"}
                         alt="Image Two"
                         style={{ width: "60%", height: "450px", margin: "auto" }} 
                     /> 
@@ -81,7 +147,7 @@ export function CarouselComponentDesktop() {
                 <Carousel.Item interval={5000}> 
                     <img 
                         className="d-block"
-                        src={img3}
+                        src={"test.png"}
                         alt="Image Two"
                         style={{ width: "60%", height: "450px", margin: "auto" }} 
                     /> 
@@ -89,7 +155,7 @@ export function CarouselComponentDesktop() {
                 <Carousel.Item interval={5000}> 
                     <img 
                         className="d-block"
-                        src={img4}
+                        src={"test.png"}
                         alt="Image Two"
                         style={{ width: "60%", height: "450px", margin: "auto" }} 
                     /> 

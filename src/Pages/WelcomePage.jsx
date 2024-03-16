@@ -7,6 +7,29 @@ import CardComponent from '../Components/Cards.jsx';
 import '../App.css'
 import {useNavigate} from "react-router-dom";
 import { NavLink } from 'react-bootstrap';
+import {getStorage, getDownloadURL, ref as storageRef } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, get, set } from "firebase/database";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBgTlxGlidVt_EpjVfXcxsji1trkcMTtQ4",
+  authDomain: "esm-auto.firebaseapp.com",
+  databaseURL: "https://esm-auto-default-rtdb.firebaseio.com",
+  projectId: "esm-auto",
+  storageBucket: "esm-auto.appspot.com",
+  messagingSenderId: "646405515422",
+  appId: "1:646405515422:web:afc778cbecfc0008fc738f",
+  measurementId: "G-LS5H0N68BE"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
+const auth = getAuth(app);
+const dbref = ref(db);
+const storage = getStorage(app); 
+
 
 //https://blog.logrocket.com/9-ways-deploy-react-app-free/
 
@@ -59,7 +82,7 @@ export function WelcomeMobile() {
           <CardComponent/>
         </div>
 
-        <NavLink onClick={() => navigateTo('/back')} style={{color:"white"}}>staff</NavLink>
+        <NavLink onClick={() => navigateTo('/back')} style={{color:"white"}}>Staff</NavLink>
 
       </FadeIn>
     </div>
@@ -67,10 +90,8 @@ export function WelcomeMobile() {
 }
 
 
-
 // SEE IF I CAN COMBINE THE TWO AGAIN
 //FIX THE DESKTOP ONE, DO THINGS LIKE MAKE THE MAIN PART MORE CENTERED
-
 
 
 export function WelcomeDesktop() {
@@ -94,7 +115,6 @@ export function WelcomeDesktop() {
   
 
   return (
-
     <div>
       <NavbarSignedIn />
       <FadeIn delay={1000} transitionDuration={800} style={{ opacity }}>
@@ -123,7 +143,7 @@ export function WelcomeDesktop() {
       </div>
         
      
-      <NavLink style={{color:"white"}}>staff</NavLink>
+      <NavLink style={{color:"white"}}>Staff</NavLink>
 
       </FadeIn>
 

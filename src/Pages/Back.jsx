@@ -8,6 +8,7 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, listAll, de
 import { v4 as uuidv4 } from "uuid";
 import { NavbarSignedIn } from '../Components/Top-Nav';
 import Form from 'react-bootstrap/Form';
+import Carousel from 'react-bootstrap/Carousel';
 
 
 
@@ -47,7 +48,7 @@ const firebaseConfig = {
     };
 
     const uploadFile = async (index) => {
-        let IMAGES = ['slide1', 'slide2', 'slide3', 'slide4', 'service1', 'service2', 'service3']
+        let IMAGES = ['slide1', 'slide2', 'slide3', 'slide4', 'service1', 'service2', 'service3'];
         const folder = IMAGES[index];
         try {
             const folderRef = storageRef(storage, folder);
@@ -57,10 +58,10 @@ const firebaseConfig = {
             await Promise.all(listResult.items.map(async (item) => {
                 await deleteObject(item);
                 console.log("Deleted item:", item.fullPath);
-            })); 
+            }));
     
-            // Upload the new image
-            const imageRef = storageRef(storage, `${folder}/${uuidv4()}`);
+            const imageName = folder;
+            const imageRef = storageRef(storage, `${folder}/${imageName}`);
             await uploadBytes(imageRef, imageUpload);
             const downloadURL = await getDownloadURL(imageRef);
             setImageUrls([downloadURL]);
@@ -78,7 +79,46 @@ const firebaseConfig = {
                 <button onClick={handleLogOut} className="btn btn-primary" >
                     Sign out
                 </button>
-                
+                <Carousel
+            style={{ textAlign: 'center', zIndex:0}} 
+            nextIcon={<span className="carousel-control-next-icon" aria-hidden="true" />} 
+            prevIcon={<span className="carousel-control-prev-icon" aria-hidden="true" />} 
+            
+        > 
+            <Carousel.Item interval={5000}> 
+                <img 
+                    className="d-block mx-auto" 
+                    src={"https://png.pngitem.com/pimgs/s/511-5115883_sailor-moon-gif-transparent-hd-png-download.png"}
+                    alt="Image One"
+                    style={{ maxWidth: "100%", height: "400px" }}
+                /> 
+            </Carousel.Item> 
+
+            <Carousel.Item interval={5000}> 
+                <img 
+                    className="d-block mx-auto" 
+                    src={"https://png.pngitem.com/pimgs/s/511-5115883_sailor-moon-gif-transparent-hd-png-download.png"}
+                    alt="Image Two"
+                    style={{ maxWidth: "100%", height: "400px" }}
+                /> 
+            </Carousel.Item> 
+            <Carousel.Item interval={5000}> 
+                <img 
+                    className="d-block mx-auto" 
+                    src={"https://png.pngitem.com/pimgs/s/511-5115883_sailor-moon-gif-transparent-hd-png-download.png"}
+                    alt="Image Two"
+                    style={{ maxWidth: "100%", height: "400px" }}
+                /> 
+            </Carousel.Item> 
+            <Carousel.Item interval={5000}> 
+                <img 
+                    className="d-block mx-auto" 
+                    src={"https://png.pngitem.com/pimgs/s/511-5115883_sailor-moon-gif-transparent-hd-png-download.png"}
+                    alt="Image Two"
+                    style={{ maxWidth: "100%", height: "400px" }}
+                /> 
+            </Carousel.Item> 
+        </Carousel> 
                 <div className="App" style={{marginTop:"10%"}}>
                     <Form.Select id='dropdown' aria-label="Default select example" style={{borderColor:"black", borderWidth:"2px",borderRadius:"50px", fontSize:"100%"}}  >
                         <option value="0">Slide1</option>
