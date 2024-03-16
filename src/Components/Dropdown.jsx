@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-function SelectWash() {
+export default function SelectWash() {
   return (
     <Form.Select aria-label="Default select example" style={{borderColor:"black", borderWidth:"2px",borderRadius:"50px", fontSize:"100%"}}  >
         <option value="1">Basic interior</option>
@@ -18,4 +18,4 @@ function SelectWash() {
   );
 }
 
-export default SelectWash;
+

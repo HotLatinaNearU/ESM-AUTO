@@ -6,6 +6,7 @@ import FadeIn from "react-fade-in";
 import CardComponent from '../Components/Cards.jsx';
 import '../App.css'
 import {useNavigate} from "react-router-dom";
+import { NavLink } from 'react-bootstrap';
 
 //https://blog.logrocket.com/9-ways-deploy-react-app-free/
 
@@ -54,9 +55,12 @@ export function WelcomeMobile() {
 
         <div style={{ paddingTop: '5%', paddingBottom: '5%' }}>
           <h1 style={{color:"white"}} >Our Services</h1>
+
           <CardComponent/>
-         
         </div>
+
+        <NavLink onClick={() => navigateTo('/back')} style={{color:"white"}}>staff</NavLink>
+
       </FadeIn>
     </div>
   );
@@ -119,7 +123,7 @@ export function WelcomeDesktop() {
       </div>
         
      
-
+      <NavLink style={{color:"white"}}>staff</NavLink>
 
       </FadeIn>
 
