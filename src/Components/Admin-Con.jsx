@@ -8,6 +8,8 @@ import { getStorage, ref as storageRef, uploadBytes, getDownloadURL, listAll, de
 import { v4 as uuidv4 } from "uuid";
 import { NavbarSignedIn } from '../Components/Top-Nav';
 import Form from 'react-bootstrap/Form';
+import Carousel from 'react-bootstrap/Carousel';
+import { Card } from 'react-bootstrap';
 
 
 
@@ -28,10 +30,18 @@ const firebaseConfig = {
   const dbref = ref(db);
   const storage = getStorage(app); 
  
-  function BackEnd() {
+  export default function AdminCon({imageClicked}) {
     const [user, setUser] = useState(null);
     const [imageUpload, setImageUpload] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
+
+    const [imageUrl1, setImageUrl1] = useState(null);
+    const [imageUrl2, setImageUrl2] = useState(null);
+    const [imageUrl3, setImageUrl3] = useState(null);
+    const [imageUrl4, setImageUrl4] = useState(null);
+    const [imageUrlSer1, setImageUrlSer1] = useState(null);
+    const [imageUrlSer2, setImageUrlSer2] = useState(null);
+    const [imageUrlSer3, setImageUrlSer3] = useState(null);
 
 
     useEffect(() => {
@@ -40,11 +50,43 @@ const firebaseConfig = {
         });
         return () => unsubscribe();
     }, []);
+    
 
-    const handleLogOut = async () => {
-        await signOut(auth);
-        console.log('User signed out successfully');
-    };
+    useEffect(() => {
+        const imgRefs = [
+            storageRef(storage, '/slide1'),
+            storageRef(storage, '/slide2'),
+            storageRef(storage, '/slide3'),
+            storageRef(storage, '/slide4'),
+            storageRef(storage, '/service1'),
+            storageRef(storage, '/service2'),
+            storageRef(storage, '/service3'),
+
+        ];
+    
+        const imgSetters = [
+            setImageUrl1,
+            setImageUrl2,
+            setImageUrl3,
+            setImageUrl4,
+            setImageUrlSer1,
+            setImageUrlSer2,
+            setImageUrlSer3,
+        ];
+    
+        imgRefs.forEach((imageRef, index) => {
+            getDownloadURL(imageRef)
+                .then((url) => {
+                    imgSetters[index](url);
+                })
+                .catch((error) => {
+                    console.error('Error getting download URL:', error);
+                });
+        });
+
+
+    }, []);
+
 
     const uploadFile = async (index) => {
         let IMAGES = ['slide1', 'slide2', 'slide3', 'slide4', 'service1', 'service2', 'service3'];
@@ -60,7 +102,7 @@ const firebaseConfig = {
             }));
     
             const imageName = folder;
-            const imageRef = storageRef(storage, `${folder}/${imageName}`);
+            const imageRef = storageRef(storage, `/${imageName}`);
             await uploadBytes(imageRef, imageUpload);
             const downloadURL = await getDownloadURL(imageRef);
             setImageUrls([downloadURL]);
@@ -68,27 +110,23 @@ const firebaseConfig = {
             console.error('Error uploading file:', error);
         }
     };
-    
 
-    if (user) {
-        return (
-            <div style={{}}>
-                <NavbarSignedIn/>
-                <h1 style={{ fontSize: "150%", color:"white", marginTop:"9%" }}>Welcome, {user.email}</h1>
-                <button onClick={handleLogOut} className="btn btn-primary" >
-                    Sign out
-                </button>
-                
-            </div>
-        );
-    } else {
-        return(
+
+if(user){
+    return(
             <div>
-                <NavbarSignedIn/>
-                <LoginForm />
+                <input style={{marginTop:"8%"}} type="file" onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+                }}
+                />
+                <p></p>
+                <button className="btn btn-primary" onClick={() => uploadFile(imageClicked)} > Upload Image</button>
             </div>
-        );
+    );
+    }else{
+        return(
+            <div></div>
+    );
     }
 }
 
-export default BackEnd;

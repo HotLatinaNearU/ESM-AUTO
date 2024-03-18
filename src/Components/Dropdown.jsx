@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 
 export default function SelectWash() {
   return (
-    <Form.Select aria-label="Default select example" style={{borderColor:"black", borderWidth:"2px",borderRadius:"50px", fontSize:"100%"}}  >
+    <Form.Select aria-label="Default select example" style={{borderColor:"black", borderRadius:"20px", borderWidth:"2px"}}   >
         <option value="1">Basic interior</option>
         <option value="2">Basic wash</option>
         <option value="3">Basic package</option>

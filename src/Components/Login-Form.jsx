@@ -39,7 +39,7 @@ export function LoginForm() {
     };
 
     return (
-        <form  className="container mx-auto p-6 rounded-lg shadow-lg "  onSubmit={handleSubmit} style={{color: 'white', position: 'fixed', top: '5%', left: '50%', transform: 'translate(-50%, 50%)'   }}>
+        <form  className="container mx-auto p-6 rounded-lg shadow-lg "  onSubmit={handleSubmit} style={{color: 'white', width:"100%", backgroundColor:"black" }}>
             <h2 className="mb-3">Login User</h2>
             <div className="form-floating mb-3">
                 <input style={{backgroundColor: '#1B1B3A', color: 'white'}} type="email" className="form-control" id="emailInput" placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { WelcomeDesktop, WelcomeMobile } from './Pages/WelcomePage';
 import BackEnd from './Pages/Back'; 
-import ContactEsm  from './Pages/ContactPage.jsx';
-import ShowServices from './Pages/Services.jsx';
-import CompletedWork from './Pages/Completed.jsx';
+import {ContactEsmMob, ContactEsmDesk}  from './Pages/ContactPage.jsx';
+import {ShowServicesMobile, ShowServicesDesk} from './Pages/Services.jsx';
 import { getDatabase, ref } from 'firebase/database';
 
 
@@ -39,9 +38,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={isMobile ? <WelcomeMobile /> : <WelcomeDesktop />} />
-          <Route path="/Contact" element={<ContactEsm/>}/>
-          <Route path="/Completed" element={<CompletedWork/>}/>
-          <Route path="/Services" element={<ShowServices/>}/>
+          <Route path="/Contact" element={isMobile ? <ContactEsmMob /> : <ContactEsmDesk />}/>
+          <Route path="/Services" element={isMobile ? <ShowServicesMobile /> : <ShowServicesDesk />}/>
           <Route path="/Back" element={<BackEnd/>}/> 
         </Routes>
       </Router>
